@@ -1,42 +1,308 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  --bg: #0b1220;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel-2: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.66);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  background: radial-gradient(1200px 600px at 20% 10%, rgba(86, 245, 215, 0.15), transparent 60%),
+    radial-gradient(1000px 700px at 70% 20%, rgba(99, 102, 241, 0.18), transparent 55%),
+    radial-gradient(900px 900px at 50% 70%, rgba(236, 72, 153, 0.12), transparent 60%),
+    var(--bg);
+  color: var(--text);
+}
+
+.pagina {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, rgba(86, 245, 215, 0.9), rgba(99, 102, 241, 0.9));
+  box-shadow: var(--shadow);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+h1 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
 }
 
-.card {
-  padding: 2em;
+.encabezado p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
 }
 
-.read-the-docs {
-  color: #888;
+.acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05));
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+}
+
+.btn-secundario {
+  color: var(--muted);
+}
+
+.contenedor {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 22px 16px 26px;
+  display: grid;
+  gap: 18px;
+}
+
+.grid-resumen {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+
+.tarjeta {
+  grid-column: span 3;
+  padding: 16px 16px 14px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--panel), rgba(255, 255, 255, 0.03));
+  box-shadow: var(--shadow);
+}
+
+.tarjeta-meta {
+  grid-column: span 3;
+}
+
+.tarjeta-titulo {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.2px;
+}
+
+.tarjeta-valor {
+  margin-top: 8px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.tarjeta-detalle {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.positivo {
+  color: rgba(134, 239, 172, 0.95);
+}
+
+.negativo {
+  color: rgba(251, 113, 133, 0.95);
+}
+
+.barra {
+  margin-top: 12px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.barra-relleno {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(86, 245, 215, 0.9), rgba(99, 102, 241, 0.9));
+}
+
+.panel {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--panel-2), rgba(255, 255, 255, 0.03));
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.panel-encabezado {
+  padding: 18px 18px 14px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-encabezado h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.panel-encabezado p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.filtros {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.input,
+.select {
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.18);
+  color: var(--text);
+  outline: none;
+  min-width: 220px;
+}
+
+.select {
+  min-width: 160px;
+  cursor: pointer;
+}
+
+.tabla-wrap {
+  overflow: auto;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.tabla th,
+.tabla td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  font-size: 13px;
+}
+
+.tabla th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.derecha {
+  text-align: right;
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.etiqueta-ingresos {
+  border-color: rgba(134, 239, 172, 0.35);
+}
+
+.etiqueta-comida {
+  border-color: rgba(250, 204, 21, 0.35);
+}
+
+.etiqueta-transporte {
+  border-color: rgba(147, 197, 253, 0.35);
+}
+
+.etiqueta-entretenimiento {
+  border-color: rgba(251, 113, 133, 0.35);
+}
+
+.etiqueta-otros {
+  border-color: rgba(203, 213, 225, 0.35);
+}
+
+.vacio {
+  padding: 18px 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.panel-footer {
+  padding: 12px 16px;
+  color: var(--muted);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(86, 245, 215, 0.9);
+  box-shadow: 0 0 0 6px rgba(86, 245, 215, 0.12);
+}
+
+.pie {
+  margin-top: auto;
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
 }
