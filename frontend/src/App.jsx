@@ -7,7 +7,7 @@ function App() {
   const [description, setDescription] = useState("")
 
   const loadTasks = () => {
-    fetch("http://localhost:3000/tasks")
+    fetch("https://loadbalancer2.onrender.com/tasks")
       .then(res => res.json())
       .then(data => setTasks(data))
   }
@@ -15,10 +15,11 @@ function App() {
   useEffect(() => {
     loadTasks()
   }, [])
-
+  const API_URL = "https://loadbalancer2.onrender.com";
+  
   const createTask = async () => {
 
-    await fetch("http://localhost:3000/tasks", {
+    await fetch(`${API_URL}/tasks`), {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
