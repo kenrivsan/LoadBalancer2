@@ -71,3 +71,86 @@ app.post("/tasks", async (req, res) => {
 app.listen(3000, () => {
     console.log("API running on http://localhost:3000")
 })
+
+// -----------------------------
+// TASKS
+// -----------------------------
+
+// Obtener todas las tareas
+app.get("/tasks", async (req, res) => {
+  const tasks = await prisma.task.findMany({
+    include: {
+      user: true,
+      category: true,
+      status: true
+    }
+  })
+  res.json(tasks)
+})
+
+// Obtener una tarea por ID
+app.get("/tasks/:id", async (req, res) => {
+  const id = parseInt(req.params.id)
+
+  const task = await prisma.task.findUnique({
+    where: { id },
+    include: {
+      user: true,
+      category: true,
+      status: true
+    }
+  })
+
+  if (!task) {
+    return res.status(404).json({ message: "Tarea no encontrada" })
+  }
+
+  res.json(task)
+})
+
+// Crear una tarea
+app.post("/tasks", async (req, res) => {
+  const { title, description, userId, categoryId, statusId } = req.body
+
+  const task = await prisma.task.create({
+    data: {
+      title,
+      description,
+      userId,
+      categoryId,
+      statusId
+    }
+  })
+
+  res.json(task)
+})
+
+// Actualizar una tarea
+app.put("/tasks/:id", async (req, res) => {
+  const id = parseInt(req.params.id)
+  const { title, description, userId, categoryId, statusId } = req.body
+
+  const task = await prisma.task.update({
+    where: { id },
+    data: {
+      title,
+      description,
+      userId,
+      categoryId,
+      statusId
+    }
+  })
+
+  res.json(task)
+})
+
+// Eliminar una tarea
+app.delete("/tasks/:id", async (req, res) => {
+  const id = parseInt(req.params.id)
+
+  await prisma.task.delete({
+    where: { id }
+  })
+
+  res.json({ message: "Tarea eliminada" })
+})
