@@ -2,6 +2,9 @@ const express = require("express")
 const cors = require("cors")
 const { PrismaClient } = require("@prisma/client")
 
+const swaggerUi = require("swagger-ui-express")
+const swaggerSpec = require("./docs/swagger")
+
 const prisma = new PrismaClient()
 const app = express()
 
@@ -11,65 +14,25 @@ app.use(express.json())
 // -----------------------------
 // USERS
 // -----------------------------
-
 app.get("/users", async (req, res) => {
-    const users = await prisma.user.findMany()
-    res.json(users)
+  const users = await prisma.user.findMany()
+  res.json(users)
 })
 
 // -----------------------------
 // CATEGORIES
 // -----------------------------
-
 app.get("/categories", async (req, res) => {
-    const categories = await prisma.category.findMany()
-    res.json(categories)
+  const categories = await prisma.category.findMany()
+  res.json(categories)
 })
 
 // -----------------------------
-// TASK STATUS
+// STATUS
 // -----------------------------
-
 app.get("/status", async (req, res) => {
-    const status = await prisma.taskStatus.findMany()
-    res.json(status)
-})
-
-// -----------------------------
-// TASKS
-// -----------------------------
-
-app.get("/tasks", async (req, res) => {
-    const tasks = await prisma.task.findMany({
-        include: {
-            user: true,
-            category: true,
-            status: true
-        }
-    })
-
-    res.json(tasks)
-})
-
-app.post("/tasks", async (req, res) => {
-
-    const { title, description, userId, categoryId, statusId } = req.body
-
-    const task = await prisma.task.create({
-        data: {
-            title,
-            description,
-            userId,
-            categoryId,
-            statusId
-        }
-    })
-
-    res.json(task)
-})
-
-app.listen(3000, () => {
-    console.log("API running on http://localhost:3000")
+  const status = await prisma.taskStatus.findMany()
+  res.json(status)
 })
 
 // -----------------------------
@@ -108,7 +71,7 @@ app.get("/tasks/:id", async (req, res) => {
   res.json(task)
 })
 
-// Crear una tarea
+// Crear tarea
 app.post("/tasks", async (req, res) => {
   const { title, description, userId, categoryId, statusId } = req.body
 
@@ -125,7 +88,7 @@ app.post("/tasks", async (req, res) => {
   res.json(task)
 })
 
-// Actualizar una tarea
+// Actualizar tarea
 app.put("/tasks/:id", async (req, res) => {
   const id = parseInt(req.params.id)
   const { title, description, userId, categoryId, statusId } = req.body
@@ -144,7 +107,7 @@ app.put("/tasks/:id", async (req, res) => {
   res.json(task)
 })
 
-// Eliminar una tarea
+// Eliminar tarea
 app.delete("/tasks/:id", async (req, res) => {
   const id = parseInt(req.params.id)
 
@@ -153,4 +116,16 @@ app.delete("/tasks/:id", async (req, res) => {
   })
 
   res.json({ message: "Tarea eliminada" })
+})
+
+// -----------------------------
+// SWAGGER
+// -----------------------------
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+
+// -----------------------------
+// START SERVER
+// -----------------------------
+app.listen(3000, () => {
+  console.log("API running on http://localhost:3000")
 })
