@@ -6,8 +6,10 @@ function App() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
+  const API_URL = "https://loadbalancer2.onrender.com";
+
   const loadTasks = () => {
-    fetch("https://loadbalancer2.onrender.com/tasks")
+    fetch(`${API_URL}/tasks`)
       .then(res => res.json())
       .then(data => setTasks(data))
   }
@@ -15,11 +17,10 @@ function App() {
   useEffect(() => {
     loadTasks()
   }, [])
-  const API_URL = "https://loadbalancer2.onrender.com";
-  
+
   const createTask = async () => {
 
-    await fetch(`${API_URL}/tasks`), {
+    await fetch(`${API_URL}/tasks`, {   // ✅ corregido
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -31,7 +32,7 @@ function App() {
         categoryId: 1,
         statusId: 1
       })
-    })
+   });
 
     setTitle("")
     setDescription("")
@@ -40,7 +41,7 @@ function App() {
 
   const deleteTask = async (id) => {
 
-    await fetch(`http://localhost:3000/tasks/${id}`, {
+    await fetch(`${API_URL}/tasks/${id}`, {  // ✅ corregido
       method: "DELETE"
     })
 
