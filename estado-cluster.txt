@@ -1,0 +1,61 @@
+NAMESPACE     NAME                                                    READY   STATUS             RESTARTS         AGE
+argocd        pod/argocd-application-controller-0                     1/1     Running            0                128m
+argocd        pod/argocd-applicationset-controller-5845f77959-zb7kh   0/1     CrashLoopBackOff   20 (3m30s ago)   128m
+argocd        pod/argocd-dex-server-77c4b977cf-4jjnd                  1/1     Running            0                128m
+argocd        pod/argocd-notifications-controller-59f5f7587b-9wv5s    1/1     Running            0                128m
+argocd        pod/argocd-redis-fdb54b985-gsx9b                        1/1     Running            0                128m
+argocd        pod/argocd-repo-server-5cb944c498-6schh                 1/1     Running            0                128m
+argocd        pod/argocd-server-6bb8b57784-tj2zn                      1/1     Running            0                111m
+gastos-app    pod/gastos-app-5784b6d9bb-69klx                         1/1     Running            0                9h
+kube-system   pod/coredns-7d764666f9-xk2gg                            1/1     Running            0                10h
+kube-system   pod/etcd-minikube                                       1/1     Running            0                10h
+kube-system   pod/kube-apiserver-minikube                             1/1     Running            0                10h
+kube-system   pod/kube-controller-manager-minikube                    1/1     Running            0                10h
+kube-system   pod/kube-proxy-54t65                                    1/1     Running            0                10h
+kube-system   pod/kube-scheduler-minikube                             1/1     Running            0                10h
+kube-system   pod/storage-provisioner                                 1/1     Running            1 (10h ago)      10h
+traefik       pod/traefik-86cb96c88c-x5pth                            1/1     Running            0                9h
+
+NAMESPACE     NAME                                              TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+argocd        service/argocd-applicationset-controller          ClusterIP      10.97.179.186    <none>        7000/TCP,8080/TCP            128m
+argocd        service/argocd-dex-server                         ClusterIP      10.104.232.56    <none>        5556/TCP,5557/TCP,5558/TCP   128m
+argocd        service/argocd-metrics                            ClusterIP      10.98.166.131    <none>        8082/TCP                     128m
+argocd        service/argocd-notifications-controller-metrics   ClusterIP      10.102.81.208    <none>        9001/TCP                     128m
+argocd        service/argocd-redis                              ClusterIP      10.98.111.78     <none>        6379/TCP                     128m
+argocd        service/argocd-repo-server                        ClusterIP      10.108.119.46    <none>        8081/TCP,8084/TCP            128m
+argocd        service/argocd-server                             ClusterIP      10.102.27.218    <none>        80/TCP,443/TCP               128m
+argocd        service/argocd-server-metrics                     ClusterIP      10.105.90.248    <none>        8083/TCP                     128m
+default       service/kubernetes                                ClusterIP      10.96.0.1        <none>        443/TCP                      10h
+gastos-app    service/gastos-app-service                        ClusterIP      10.107.156.209   <none>        80/TCP                       9h
+kube-system   service/kube-dns                                  ClusterIP      10.96.0.10       <none>        53/UDP,53/TCP,9153/TCP       10h
+traefik       service/traefik                                   LoadBalancer   10.104.35.199    <pending>     80:31828/TCP,443:32549/TCP   9h
+
+NAMESPACE     NAME                        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+kube-system   daemonset.apps/kube-proxy   1         1         1       1            1           kubernetes.io/os=linux   10h
+
+NAMESPACE     NAME                                               READY   UP-TO-DATE   AVAILABLE   AGE
+argocd        deployment.apps/argocd-applicationset-controller   0/1     1            0           128m
+argocd        deployment.apps/argocd-dex-server                  1/1     1            1           128m
+argocd        deployment.apps/argocd-notifications-controller    1/1     1            1           128m
+argocd        deployment.apps/argocd-redis                       1/1     1            1           128m
+argocd        deployment.apps/argocd-repo-server                 1/1     1            1           128m
+argocd        deployment.apps/argocd-server                      1/1     1            1           128m
+gastos-app    deployment.apps/gastos-app                         1/1     1            1           9h
+kube-system   deployment.apps/coredns                            1/1     1            1           10h
+traefik       deployment.apps/traefik                            1/1     1            1           9h
+
+NAMESPACE     NAME                                                          DESIRED   CURRENT   READY   AGE
+argocd        replicaset.apps/argocd-applicationset-controller-5845f77959   1         1         0       128m
+argocd        replicaset.apps/argocd-dex-server-77c4b977cf                  1         1         1       128m
+argocd        replicaset.apps/argocd-notifications-controller-59f5f7587b    1         1         1       128m
+argocd        replicaset.apps/argocd-redis-fdb54b985                        1         1         1       128m
+argocd        replicaset.apps/argocd-repo-server-5cb944c498                 1         1         1       128m
+argocd        replicaset.apps/argocd-server-564b78949                       0         0         0       111m
+argocd        replicaset.apps/argocd-server-6bb8b57784                      1         1         1       111m
+argocd        replicaset.apps/argocd-server-775bbd79f5                      0         0         0       128m
+gastos-app    replicaset.apps/gastos-app-5784b6d9bb                         1         1         1       9h
+kube-system   replicaset.apps/coredns-7d764666f9                            1         1         1       10h
+traefik       replicaset.apps/traefik-86cb96c88c                            1         1         1       9h
+
+NAMESPACE   NAME                                             READY   AGE
+argocd      statefulset.apps/argocd-application-controller   1/1     128m
