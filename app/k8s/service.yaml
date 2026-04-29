@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gastos-app-service
+  namespace: gastos-app
+spec:
+  selector:
+    app: gastos-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

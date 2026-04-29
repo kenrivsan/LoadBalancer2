@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gastos-app
+  namespace: gastos-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gastos-app
+  template:
+    metadata:
+      labels:
+        app: gastos-app
+    spec:
+      containers:
+        - name: gastos-app
+          image: kennethriv/assignment-04:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
